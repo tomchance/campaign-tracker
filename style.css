@@ -1,0 +1,36 @@
+html, body, #container {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+body {
+  /* height of .navbar, customize with @navbar-height variable */
+  padding-top: 80px;
+}
+.navbar-home {
+  min-height: 50px;
+}
+.navbar-map {
+  min-height: 80px;
+}
+h1.navbar-brand {
+  margin: 0 !important;
+}
+.navbar-infobelow {
+  background-color: #444;
+  box-shadow: 0 4px 2px -2px gray;
+  min-height: 30px;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  color: #9d9d9d;
+}
+#map {
+  height: 100%;
+  width: auto;
+}
+input[type=number]{
+  width: 80px !important;
+}
