@@ -103,7 +103,7 @@ function updateStatus(id, newstatus) {
       roadsLayer._layers[roadfeature].feature.properties.status = newstatus;
       campaign = GetURLParameter('campaign');
       console.log("Updating db records for road " + id + " to " + newstatus);
-      var q = "lib/updatestatus.php?status=" + newstatus + "&road=" + id + "&campaign=" + campaign
+      var q = "lib/updatestatus.php?status=" + newstatus + "&road=" + id + "&campaign=" + campaign;
       console.log("(" + q + ")");
       $.get(q, function(d) { if (d) { alert(d); } });
     }

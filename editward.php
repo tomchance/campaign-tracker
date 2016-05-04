@@ -6,17 +6,6 @@ $db = connect_to_database();
 
 // Get URL parameters
 $ward = $db->escape_string($_GET['ward']);
-$camp = $db->escape_string($_GET['campaign']);
-
-// Get campaign title
-if (!($q = $db->prepare("SELECT name FROM l_campaigns WHERE id = ?"))) {
-  die("Prepare failed: (" . $db->errno . ") " . $db->error);
-}
-$q->bind_param('i', $camp);
-$q->execute();
-$q->bind_result($name);
-$q->fetch();
-$q->free_result();
 
 // Get ward name
 if (!($q = $db->prepare("SELECT name FROM l_wards WHERE id = ?"))) {
@@ -35,16 +24,17 @@ $db->close();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Campaigns | <?php echo $name; ?></title>
+<title>Campaigns | <?php echo $ward_name; ?></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="leaflet.draw.css" />
+<link rel="stylesheet" href="style.css" />
 <script src="lib/geojson.php?type=bounds&id=<?php echo $ward; ?>" type="text/javascript"></script>
 <script src="lib/geojson.php?type=roads&id=<?php echo $ward; ?>" type="text/javascript"></script>
-<script src="lib/status.php?campaign=<?php echo $camp; ?>&ward=<?php echo $ward; ?>" type="text/javascript"></script>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<link rel="stylesheet" href="style.css" />
+<script src="js/leaflet.draw.js"></script>
 </head>
 
 <body>
@@ -58,7 +48,7 @@ $db->close();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <h1 class="navbar-brand">Campaigns tracker</h1>
+          <h1 class="navbar-brand">Campaigns progress</h1>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
           <ul class="nav navbar-nav">
@@ -76,7 +66,7 @@ $db->close();
       </div>
       <div class="container-fluid">
         <div class="navbar-infobelow">
-          Ward: <?php echo $ward_name; ?> &nbsp; &nbsp; Campaign: <?php echo $name; ?>
+          Ward: <?php echo $ward_name; ?>
         </div>
       </div>
     </div>
@@ -86,7 +76,7 @@ $db->close();
 
 <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script src="js/map.js"></script>
+<script src="js/editward.js"></script>
 
 </body>
 </html>

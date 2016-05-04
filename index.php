@@ -48,7 +48,7 @@ $db->close();
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <h1 class="navbar-brand">Campaigns progress</h1>
+        <h1 class="navbar-brand">Campaigns tracker</h1>
       </div>
     </div>
   </div>
@@ -69,15 +69,17 @@ $db->close();
       </div>
 -->
       <div class="col-md-12">
-        <h2>Campaigns</h2>
+        <h2>Green Party campaign tracker</h2>
         <?php foreach ($wards as $ward): ?>
         <h3><?php print($ward['name']); ?></h3>
+        <p><a href="editward.php?ward=<?php print($ward['id']); ?>">Edit ward roads</a></p>
+        <h4>Campaigns in <?php print($ward['name']); ?></h4>
         <ul id="list-wards-<?php print($ward['id']); ?>">
           <?php foreach ($ward['campaigns'] as $camp): ?>
           <li>
             <form id="addcampaign-<?php print($ward['id']); ?>" class="form-inline">
             <div class="form-group-xs">
-              <a href="progress.php?campaign=<?php print($camp['cid']);?>&ward=<?php print($ward['id']); ?>" class="cedit-<?php print($camp['cid']);?>" id="clink-<?php print($camp['cid']);?>"><?php print($camp['cname']); ?></a>
+              <a href="progress.php?campaign=<?php print($camp['cid']);?>&ward=<?php print($ward['id']); ?>" class="cedit-<?php print($camp['cid']);?>" id="clink-<?php print($camp['cid']);?>"><?php print($camp['year']); ?> - <?php print($camp['cname']); ?></a>
               <button id="editcamp-<?php print($camp['cid']); ?>" type="button" class="btn btn-info btn-xs cedit-<?php print($camp['cid']);?>" style="cursor:pointer">edit</button>
               <input type="text" size="14" class="form-control input-xs start-hidden csave-<?php print($camp['cid']);?>" value="<?php print($camp['cname']); ?>" id="name-<?php print($camp['cid']);?>">
               <button id="savecamp-<?php print($camp['cid']); ?>" type="button" class="btn btn-success btn-xs start-hidden csave-<?php print($camp['cid']);?>" style="cursor:pointer">save</button>
